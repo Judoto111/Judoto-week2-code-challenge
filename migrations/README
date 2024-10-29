@@ -1,1 +1,134 @@
-Single-database configuration for Flask.
+Late Show Project Overview
+This project implements a RESTful API using Flask-RESTful, managing a database of Episodes, Guests, and Appearances. Users can perform operations such as listing episodes, fetching episode details, and adding guest appearances.
+
+Key Features
+Episodes: Retrieve all episodes or details for a specific episode.
+Guests: View all available guests.
+Appearances: Add new guest appearances for designated episodes.
+Prerequisites
+To set up and run this project locally, you need:
+
+Python 3.x
+Flask
+Flask-RESTful
+Flask-SQLAlchemy
+Flask-Migrate
+Installation Steps
+Clone the Repository Begin by cloning the repository to your local machine:
+
+bash
+Copy code
+git clone <repository_url>
+cd <project_directory>
+Configure the Database Initialize the database before running the application:
+
+Ensure that the database URI in config.py is correctly set:
+
+python
+Copy code
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+Run the following commands to create the necessary database tables:
+
+bash
+Copy code
+flask db init
+flask db migrate
+flask db upgrade
+Seed the Database (Optional) If you have a CSV file containing sample data, you can seed it into the database with:
+
+bash
+Copy code
+python seed_data.py <path_to_your_csv_file>
+Ensure your CSV is formatted correctly with the appropriate columns for guest names, occupations, and episode details.
+
+Run the Server Start the server on port 5555 using:
+
+bash
+Copy code
+python app.py
+The API will be accessible at http://localhost:5555.
+
+API Endpoints
+List All Episodes
+
+Method: GET
+Endpoint: /episodes
+Description: Fetch a list of all episodes with details.
+Sample Response:
+json
+Copy code
+[
+  {
+    "id": 1,
+    "date": "2023-10-01",
+    "number": 1,
+    "appearances": [
+      {
+        "id": 1,
+        "rating": 5,
+        "guest": {
+          "id": 1,
+          "name": "Guest Name",
+          "occupation": "Actor"
+        }
+      }
+    ]
+  }
+]
+Get Episode by ID
+
+Method: GET
+Endpoint: /episodes/<int:id>
+Description: Retrieve detailed information about a specific episode.
+List All Guests
+
+Method: GET
+Endpoint: /guests
+Description: Fetch a list of all guests.
+Sample Response:
+json
+Copy code
+[
+  {
+    "id": 1,
+    "name": "Guest Name",
+    "occupation": "Actor"
+  }
+]
+Create New Appearance
+
+Method: POST
+Endpoint: /appearances
+Description: Add a new guest appearance in an episode. Include guest ID, episode ID, and rating in the request body.
+Sample Request Body:
+json
+Copy code
+{
+  "rating": 4,
+  "episode_id": 1,
+  "guest_id": 1
+}
+Using Postman to Test the API
+To interact with the API using Postman:
+
+Open Postman.
+
+Create a New Request:
+
+Click on "New" and select "HTTP Request."
+Set the Request Type:
+
+For listing episodes, select GET.
+For creating an appearance, select POST.
+Enter the Request URL:
+
+For listing episodes: http://localhost:5555/episodes
+For adding an appearance: http://localhost:5555/appearances
+For POST Requests:
+
+Go to the "Body" tab.
+Select "raw" and choose "JSON" from the dropdown.
+Enter your JSON data (e.g., for adding an appearance).
+Send the Request:
+
+Click on "Send" and check the response in the lower section of the Postman window.

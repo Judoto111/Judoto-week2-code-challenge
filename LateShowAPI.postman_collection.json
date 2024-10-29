@@ -1,0 +1,79 @@
+{
+    "info": {
+        "_postman_id": "your_postman_id",
+        "name": "Late Show API",
+        "description": "Collection for testing Late Show API endpoints.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "List All Episodes",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:5555/episodes",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "5555",
+                    "path": ["episodes"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Get Episode by ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:5555/episodes/1",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "5555",
+                    "path": ["episodes", "1"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "List All Guests",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:5555/guests",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "5555",
+                    "path": ["guests"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Create New Appearance",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\"rating\": 5, \"episode_id\": 1, \"guest_id\": 1}"
+                },
+                "url": {
+                    "raw": "http://localhost:5555/appearances",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "5555",
+                    "path": ["appearances"]
+                }
+            },
+            "response": []
+        }
+    ]
+}
